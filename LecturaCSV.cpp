@@ -1,9 +1,5 @@
-//
-// Created by ITALO on 6/05/2026.
-//
-
 #include "LecturaCSV.h"
-#include "PELIS.h"
+#include "Pelis.h"
 
 #include <iostream>
 #include <fstream>
@@ -17,9 +13,7 @@ vector<Pelis> cargarPelis(string filename) {
 
     vector<Pelis> pelis;
 
-    ifstream file;
-
-    file.open(filename);
+    ifstream file(filename);
 
     if(!file.is_open()) {
 
@@ -45,27 +39,37 @@ vector<Pelis> cargarPelis(string filename) {
         string wikiPage;
         string plot;
 
-        getline(ss, yearStr, '\t');
-        getline(ss, title, '\t');
-        getline(ss, origin, '\t');
-        getline(ss, director, '\t');
-        getline(ss, cast, '\t');
-        getline(ss, genre, '\t');
-        getline(ss, wikiPage, '\t');
-        getline(ss, plot, '\t');
+        getline(ss, yearStr, ',');
+        getline(ss, title, ',');
+        getline(ss, origin, ',');
+        getline(ss, director, ',');
+        getline(ss, cast, ',');
+        getline(ss, genre, ',');
+        getline(ss, wikiPage, ',');
+        getline(ss, plot);
 
         int year = 0;
 
         try {
 
             year = stoi(yearStr);
+        }
 
-        } catch(...) {
+        catch(...) {
 
             year = 0;
         }
 
-        Pelis peli(year,title,origin,director,cast,genre,wikiPage,plot);
+        Pelis peli(
+            year,
+            title,
+            origin,
+            director,
+            cast,
+            genre,
+            wikiPage,
+            plot
+        );
 
         pelis.push_back(peli);
     }
