@@ -1,10 +1,5 @@
-//
-// Created by ITALO on 6/05/2026.
-//
-
 #include "Pelis.h"
 #include <iostream>
-
 
 using namespace std;
 
@@ -13,7 +8,7 @@ Pelis::Pelis() {
 }
 
 Pelis::Pelis(int fechaCreacion, string titulo, string origen, string director, string cast, string genero, string wikiPage, string plot)
-    {
+{
 
     this->fechaCreacion=fechaCreacion;
     this->titulo=titulo;
