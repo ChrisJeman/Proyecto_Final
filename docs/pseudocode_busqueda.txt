@@ -1,0 +1,35 @@
+ALGORITMO BuscarPlataforma(consultaUsuario, numeroPagina)
+    // 1. Preparar la consulta
+    tokensBusqueda = Tokenizar(consultaUsuario) 
+    MapaResultados = CrearMapaVacío() // Diccionario <ID_Pelicula, PuntajeTotal>
+
+    // 2. Buscar cada palabra/token en el Suffix Tree
+    PARA CADA palabra EN tokensBusqueda:
+        NodoFinal = NavegarArbol(palabra)
+        
+        SI NodoFinal existe ENTONCES:
+            // El Suffix Tree nos da todas las películas que contienen esa secuencia
+            PARA CADA (peliculaID, puntaje) EN NodoFinal.ranking:
+                MapaResultados[peliculaID] += puntaje
+    
+    // 3. Convertir resultados a una lista para poder ordenar
+    ListaOrdenada = ConvertirAListaDePares(MapaResultados)
+    
+    // 4. Aplicar el Algoritmo de Importancia (Ordenar por puntaje desc)
+    OrdenarPorPuntajeDescendente(ListaOrdenada)
+    
+    // 5. Manejar Paginación (Mostrar de 5 en 5)
+    Inicio = numeroPagina * 5
+    Fin = Inicio + 5
+    RETORNAR SubLista(ListaOrdenada, Inicio, Fin)
+FIN ALGORITMO
+
+FUNCION NavegarArbol(cadena)
+    NodoActual = RaizDelArbol
+    PARA CADA caracter EN cadena:
+        SI NodoActual.hijos contiene 'caracter' ENTONCES:
+            NodoActual = NodoActual.hijos[caracter]
+        SINO:
+            RETORNAR Nulo // No hay coincidencias
+    RETORNAR NodoActual
+FIN FUNCION
