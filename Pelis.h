@@ -1,9 +1,9 @@
 //
-// Created by ITALO on 6/05/2026.
+// Created by ACER on 7/05/2026.
 //
 
-#ifndef PROYECTOPART1_PELIS_H
-#define PROYECTOPART1_PELIS_H
+#ifndef PROYECTO_PROGRA_III_PELIS_H
+#define PROYECTO_PROGRA_III_PELIS_H
 
 #include <string>
 #include <vector>
@@ -53,5 +53,4 @@ public:
 
 };
 
-
-#endif //PROYECTOPART1_PELIS_H
+#endif //PROYECTO_PROGRA_III_PELIS_H
