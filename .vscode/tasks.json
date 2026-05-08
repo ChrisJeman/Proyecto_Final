@@ -13,6 +13,7 @@
                 "src/Pelis.cpp",
                 "src/Trie.cpp",
                 "src/TrieNode.cpp",
+                "src/Interfaz.cpp",
                 "-o",
                 "src/main.exe",
                 "-Iinclude"

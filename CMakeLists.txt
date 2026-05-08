@@ -5,9 +5,14 @@ set(CMAKE_CXX_STANDARD 20)
 
 include_directories(include)
 
-add_executable(ProyectoFinal
-        src/main.cpp
-        src/LecturaCSV.cpp
-        src/Pelis.cpp
-        src/Trie.cpp
-        src/TrieNode.cpp)
+add_executable(ProyectoFinal main.cpp
+        LecturaCSV.cpp
+        LecturaCSV.h
+        Pelis.cpp
+        Pelis.h
+        Trie.cpp
+        Trie.h
+        TrieNode.cpp
+        TrieNode.h
+        Interfaz.h
+        Interfaz.cpp)

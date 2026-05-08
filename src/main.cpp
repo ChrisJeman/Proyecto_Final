@@ -6,6 +6,7 @@
 #include "../include/LecturaCSV.h"
 #include "../include/Pelis.h"
 #include "../include/Trie.h"
+#include "../include/Interfaz.h"
 
 using namespace std;
 
@@ -122,39 +123,8 @@ int main() {
             trie.insertar(palabra, i);
         }
     }
-
-    string busqueda;
-
-    cout << "\nIngrese busqueda: ";
-
-    getline(cin, busqueda);
-
-    busqueda = convertirMinusculas(busqueda);
-
-    vector<int> resultados;
-
-    resultados = trie.buscar(busqueda);
-
-    cout << "\n===== RESULTADOS =====\n";
-
-    if(resultados.empty()) {
-
-        cout << "No se encontraron peliculas.\n";
-    }
-
-    else {
-
-        int limite = 5;
-
-        for(int i = 0;
-            i < resultados.size() && i < limite;
-            i++) {
-
-            int id = resultados[i];
-
-            pelis[id].mostrarPeli();
-        }
-    }
+    Interfaz interfaz(pelis, trie);
+    interfaz.iniciar();
 
     return 0;
 }
