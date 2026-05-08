@@ -1,0 +1,60 @@
+FUNCION NormalizarTexto(texto):
+    1. Convertir todo el texto a MINÚSCULAS.
+    2. Eliminar caracteres especiales (nos falta esto).
+    3. RETORNAR texto limpio.
+
+FUNCION Tokenizar(texto):
+    1. Dividir el texto en palabras individuales usando los espacios como separador.
+    2. RETORNAR lista de palabras.
+
+ALGORITMO CargarEIndexarPeliculas:
+    1. pelis = cargarDesdeCSV("archivo.csv")
+    2. trie = Instanciar nuevo Trie()
+
+    // Iteramos sobre la base de datos (Hasta 5000 para pruebas)
+    3. PARA i DESDE 0 HASTA longitud(pelis) - 1:
+        peliActual = pelis[i]
+        ID = i // Nosotros estamos usando el índice como identificador único
+
+        //PROCESAR TÍTULO (Suffix Trie + Peso 10) (Nos falta agregar los pesos, los usaremos en la búsqueda!)
+        palabrasTitulo = Tokenizar(NormalizarTexto(peliActual.titulo))
+        PARA CADA palabra EN palabrasTitulo:
+            // Generamos sufijos para permitir búsqueda de sub-palabras
+            PARA j DESDE 0 HASTA longitud(palabra) - 1:
+                sufijo = palabra.subcadena(desde j hasta el final)
+                trie.insertar(sufijo, ID, PESO_TITULO)
+
+        //PROCESAR TAGS (Trie Estándar + Peso 7)
+        camposTags = [peliActual.director, peliActual.genero, peliActual.cast]
+        Por cada campo EN camposTags:
+            palabras = Tokenizar(NormalizarTexto(campo))
+            PARA CADA palabra EN palabras:
+                trie.insertar(palabra, ID, PESO_TAGS)
+
+        //PROCESAR SINOPSIS (Trie Estándar + Peso 3) ---
+        palabrasPlot = Tokenizar(NormalizarTexto(peliActual.plot))
+        PARA CADA palabra EN palabrasPlot:
+            trie.insertar(palabra, ID, PESO_PLOT)
+
+    4. Responder "Indexación completada con éxito."
+FIN ALGORITMO
+
+//SUGERENCIA//
+(Modificar el método de insertar para incluir Pesos)
+PROCEDIMIENTO Trie::insertar(cadena, idPelicula, peso):
+    NodoActual = raiz
+    PARA CADA caracter EN cadena:
+        SI NodoActual no tiene hijo con 'caracter':
+        .
+        .
+        .
+        Sigue igual como antes
+
+    // Podríamos modificar el vector en  vector<int> peliculas para usar diccionario
+    // donde la clave es el ID de la película y el valor es su puntaje acumulado.
+    
+    SI idPelicula NO EXISTE en NodoActual.ranking:
+        NodoActual.ranking[idPelicula] = peso
+    SINO:
+        NodoActual.ranking[idPelicula] += peso
+FIN PROCEDIMIENTO

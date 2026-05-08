@@ -1,35 +1,37 @@
-ALGORITMO BuscarPlataforma(consultaUsuario, numeroPagina)
-    // 1. Preparar la consulta
-    tokensBusqueda = Tokenizar(consultaUsuario) 
-    MapaResultados = CrearMapaVacío() // Diccionario <ID_Pelicula, PuntajeTotal>
+ALGORITMO BuscarEnPlataforma(consultaUsuario, paginaActual):
+    // 1. Se Pre-procesa de la consulta
+    //Convertir a minúsculas
+    tokensBusqueda = Tokenizar(consulta)// separar en palabras lo obtenido
+    
+    // Diccionario temporal para acumular puntos de todas las palabras buscadas <ID_Pelicula, Puntaje_Acumulado>
+    MapaResultadosGlobal = CrearDiccionarioVacio()
 
-    // 2. Buscar cada palabra/token en el Suffix Tree
+    //BUSQUEDA CON RANKING
+    // 2. Búsqueda y Acumulación de Puntos
     PARA CADA palabra EN tokensBusqueda:
-        NodoFinal = NavegarArbol(palabra)
+        NodoResultado = miTrie.buscar(palabra)
         
-        SI NodoFinal existe ENTONCES:
-            // El Suffix Tree nos da todas las películas que contienen esa secuencia
-            PARA CADA (peliculaID, puntaje) EN NodoFinal.ranking:
-                MapaResultados[peliculaID] += puntaje
-    
-    // 3. Convertir resultados a una lista para poder ordenar
-    ListaOrdenada = ConvertirAListaDePares(MapaResultados)
-    
-    // 4. Aplicar el Algoritmo de Importancia (Ordenar por puntaje desc)
-    OrdenarPorPuntajeDescendente(ListaOrdenada)
-    
-    // 5. Manejar Paginación (Mostrar de 5 en 5)
-    Inicio = numeroPagina * 5
-    Fin = Inicio + 5
-    RETORNAR SubLista(ListaOrdenada, Inicio, Fin)
-FIN ALGORITMO
+       //En caso que SI está
+            // Extraemos el mapa de ranking que vive en ese nodo con los pesos (10, 7, 3)
+            PARA CADA (idPelicula, puntaje) EN NodoResultado.ranking:
+                MapaResultadosGlobal[idPelicula] += puntaje
 
-FUNCION NavegarArbol(cadena)
-    NodoActual = RaizDelArbol
-    PARA CADA caracter EN cadena:
-        SI NodoActual.hijos contiene 'caracter' ENTONCES:
-            NodoActual = NodoActual.hijos[caracter]
+    // 3. Transformación y Ordenamiento (Algoritmo de Importancia)
+    // Convertimos el mapa a una lista de pares para poder ordenar
+    ListaFinal = ConvertirAListaDePares(MapaResultadosGlobal)
+    
+    // Ordenamos de mayor a menor puntaje
+    ORDENAR ListaFinal POR puntaje DESCENDENTE
+
+    // 4.Finalmente la lógica de Paginación (Para mostrar de 5 en 5)
+    IndiceInicio = paginaActual * 5
+    PARA i DESDE IndiceInicio HASTA IndiceInicio + 4:
+        SI i < longitud(ListaFinal):
+            ID = ListaFinal[i].idPelicula
+            Pelicula = listaPeliculas[ID]
+            MOSTRAR Pelicula.titulo + " (Puntaje: " + ListaFinal[i].puntaje + ")"
         SINO:
-            RETORNAR Nulo // No hay coincidencias
-    RETORNAR NodoActual
-FIN FUNCION
+            MOSTRAR "Fin de los resultados."
+            ROMPER BUCLE
+
+FIN ALGORITMO

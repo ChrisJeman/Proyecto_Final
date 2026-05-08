@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\Program Files\\MSYS2\\ucrt64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-g",
+                "src/main.cpp",
+                "src/LecturaCSV.cpp",
+                "src/Pelis.cpp",
+                "src/Trie.cpp",
+                "src/TrieNode.cpp",
+                "-o",
+                "src/main.exe",
+                "-Iinclude"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Compiler: C:\\Program Files\\MSYS2\\ucrt64\\bin\\g++.exe"
+        }
+    ]
+}

@@ -9,7 +9,7 @@
 #include <vector>
 #include <string>
 
-#include "PELIS.h"
+#include "Pelis.h"
 
 using namespace std;
 
