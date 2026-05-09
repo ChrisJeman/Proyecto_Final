@@ -113,9 +113,13 @@ El archivo CSV fue mejorado y depurado para soportar correctamente:
 - líneas vacías
 - limpieza de espacios
 
-Estas mejoras evitan corrupción de datos durante la carga de películas.
-
 ---
+
+```text
+Estas mejoras que evitan corrupción de datos durante la carga de películas, esta disponible en la rama de feature-csv-depurado
+```
+
+
 
 # Tecnologías utilizadas
 
