@@ -12,9 +12,8 @@ Este proyecto implementa un sistema de búsqueda de películas usando estructura
 ## Estructura de datos
 Para garantizar una búsqueda de complejidad $O(m)$ ($m$ es la longitud de la palabra), hemos implementado:
 Suffix Trie (Mixto): 
-- Se utiliza lógica de sufijos para los Títulos, permitiendo búsquedas parciales.
-- Se utiliza lógica de Trie estándar para el Plot y Tags para optimizar el uso de memoria RAM.
-- Unordered Maps: Utilizados en cada nodo del árbol para gestionar los hijos y el ranking de importancia de manera eficiente.
+- Se utiliza lógica de sufijos para los Títulos, permitiendo búsquedas parciales. Al insertar todos los sufijos de los títulos de las películas, el sistema puede encontrar coincidencias en cualquier posición de la palabra (por ejemplo buscamos "man" y encontram+os "Batman").
+- Se utiliza lógica de Trie estándar para el Plot y Tags para optimizar el uso de la memoria RAM. El plot y los tags se indexan como palabras completas para evitar el crecimiento exponencial de nodos.
 ## Instrucciones para abrir y ejecutar
 
 ### Paso 1: Clonar repositorio
