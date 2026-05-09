@@ -1,9 +1,9 @@
 #include "LecturaCSV.h"
 #include "Pelis.h"
+#include "Utils.h"
 
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <vector>
 #include <string>
 
@@ -26,33 +26,48 @@ vector<Pelis> cargarPelis(string filename) {
 
     getline(file, line);
 
+    string registroCompleto;
+
     while(getline(file, line)) {
 
-        stringstream ss(line);
+        if(trim(line).empty()) {
+            continue;
+        }
 
-        string yearStr;
-        string title;
-        string origin;
-        string director;
-        string cast;
-        string genre;
-        string wikiPage;
-        string plot;
+        registroCompleto += line;
 
-        getline(ss, yearStr, ',');
-        getline(ss, title, ',');
-        getline(ss, origin, ',');
-        getline(ss, director, ',');
-        getline(ss, cast, ',');
-        getline(ss, genre, ',');
-        getline(ss, wikiPage, ',');
-        getline(ss, plot);
+        if(
+            !comillasBalanceadas(
+                registroCompleto
+            )
+        ) {
+
+            registroCompleto += "\n";
+
+            continue;
+        }
+
+        vector<string> campos =
+            parseCSVLine(
+                registroCompleto
+            );
+
+        registroCompleto.clear();
+
+        if(campos.size() < 8) {
+
+            cout
+                << "Linea invalida detectada."
+                << endl;
+
+            continue;
+        }
 
         int year = 0;
 
         try {
 
-            year = stoi(yearStr);
+            year = stoi(campos[0]);
         }
 
         catch(...) {
@@ -61,14 +76,15 @@ vector<Pelis> cargarPelis(string filename) {
         }
 
         Pelis peli(
+
             year,
-            title,
-            origin,
-            director,
-            cast,
-            genre,
-            wikiPage,
-            plot
+            campos[1],
+            campos[2],
+            campos[3],
+            campos[4],
+            campos[5],
+            campos[6],
+            campos[7]
         );
 
         pelis.push_back(peli);

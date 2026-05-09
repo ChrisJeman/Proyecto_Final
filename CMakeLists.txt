@@ -13,4 +13,6 @@ add_executable(ProyectoFinal main.cpp
         TrieNode.cpp
         TrieNode.h
         Interfaz.h
-        Interfaz.cpp)
+        Interfaz.cpp
+        Utils.h
+        Utils.cpp)

@@ -44,7 +44,7 @@ int main() {
 
     Trie trie;
 
-    pelis = cargarPelis("wiki_movie_plots_deduped.csv");
+    pelis = cargarPelis("../wiki_movie_plots_deduped.csv");
 
     cout << "Cantidad de peliculas cargadas: "
          << pelis.size() << endl;
