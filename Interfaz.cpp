@@ -55,7 +55,17 @@ void Interfaz::iniciar() {
 
     do {
         mostrarMenu();
-        cin >> opcion;
+        if(!(cin >> opcion)) {
+
+            cin.clear();
+
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            cout << "\nEntrada invalida. Debe ingresar un numero y que sea dentro del rango.\n";
+
+            continue;
+        }
+
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         switch (opcion) {
