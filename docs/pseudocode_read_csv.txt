@@ -1,0 +1,26 @@
+ALGORITMO CargarPeliculas(nombreArchivo)
+    ENTRADA: Cadena con la ruta del archivo (.csv)
+    SALIDA: Lista (vector) de objetos tipo Película
+
+    INICIO
+        1. Intentar abrir el archivo 'nombreArchivo' 
+        2. SI el archivo no se puede abrir:
+            a. Mostrar mensaje de error: "Archivo no encontrado"
+            b. Retornar lista vacía
+        
+        3. Leer y descartar la primera línea (cabecera del CSV)
+        
+        4. MIENTRAS existan líneas por leer en el archivo:
+            a. Leer la línea completa
+            b. Dividir la línea usando el delimitador ('\t') en:
+               - añoTexto, titulo, origen, director, elenco, genero, urlWiki, trama
+            
+            c. Intentar convertir 'añoTexto' a un número entero:
+               - SI falla, asignar 0
+            d. Crear un nuevo objeto 'Pelicula' con los datos obtenidos
+            e. Asignar un ID único incremental (nos falta implementar esto en LecturaCSV, es para aligerar la lectura de datos en el suffix tree) 
+            f. Agregar el objeto a la lista 'pelis'
+        
+        5. Cerrar el archivo
+        6. RETORNAR la lista 'pelis'
+    FIN

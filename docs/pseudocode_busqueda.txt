@@ -1,0 +1,37 @@
+ALGORITMO BuscarEnPlataforma(consultaUsuario, paginaActual):
+    // 1. Se Pre-procesa de la consulta
+    //Convertir a minúsculas
+    tokensBusqueda = Tokenizar(consulta)// separar en palabras lo obtenido
+    
+    // Diccionario temporal para acumular puntos de todas las palabras buscadas <ID_Pelicula, Puntaje_Acumulado>
+    MapaResultadosGlobal = CrearDiccionarioVacio()
+
+    //BUSQUEDA CON RANKING
+    // 2. Búsqueda y Acumulación de Puntos
+    PARA CADA palabra EN tokensBusqueda:
+        NodoResultado = miTrie.buscar(palabra)
+        
+       //En caso que SI está
+            // Extraemos el mapa de ranking que vive en ese nodo con los pesos (10, 7, 3)
+            PARA CADA (idPelicula, puntaje) EN NodoResultado.ranking:
+                MapaResultadosGlobal[idPelicula] += puntaje
+
+    // 3. Transformación y Ordenamiento (Algoritmo de Importancia)
+    // Convertimos el mapa a una lista de pares para poder ordenar
+    ListaFinal = ConvertirAListaDePares(MapaResultadosGlobal)
+    
+    // Ordenamos de mayor a menor puntaje
+    ORDENAR ListaFinal POR puntaje DESCENDENTE
+
+    // 4.Finalmente la lógica de Paginación (Para mostrar de 5 en 5)
+    IndiceInicio = paginaActual * 5
+    PARA i DESDE IndiceInicio HASTA IndiceInicio + 4:
+        SI i < longitud(ListaFinal):
+            ID = ListaFinal[i].idPelicula
+            Pelicula = listaPeliculas[ID]
+            MOSTRAR Pelicula.titulo + " (Puntaje: " + ListaFinal[i].puntaje + ")"
+        SINO:
+            MOSTRAR "Fin de los resultados."
+            ROMPER BUCLE
+
+FIN ALGORITMO

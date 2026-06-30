@@ -1,0 +1,4 @@
+/c/Users/User/Documents/entrega/build/CMakeFiles/ProyectoFinal.dir
+/c/Users/User/Documents/entrega/build/CMakeFiles/benchmark_indexacion.dir
+/c/Users/User/Documents/entrega/build/CMakeFiles/edit_cache.dir
+/c/Users/User/Documents/entrega/build/CMakeFiles/rebuild_cache.dir

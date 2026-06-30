@@ -1,0 +1,25 @@
+# ninja log v7
+9	1317	1782762091171840800	CMakeFiles/ProyectoFinal.dir/src/EstrategiaRanking.cpp.o	7647d6702b885eb
+199	1323	1782762091362725500	CMakeFiles/benchmark_indexacion.dir/src/EstrategiaRanking.cpp.o	7775d7699db329ac
+354	1333	1782762091516806400	CMakeFiles/benchmark_indexacion.dir/src/PeliculaBuilder.cpp.o	1673b972b48eee8f
+124	1335	1782762091288436600	CMakeFiles/ProyectoFinal.dir/src/PeliculaBuilder.cpp.o	ea28b2528ae1e213
+105	1483	1782762091266057200	CMakeFiles/ProyectoFinal.dir/src/Pelicula.cpp.o	4475022b68f6af77
+337	1508	1782762091500128300	CMakeFiles/benchmark_indexacion.dir/src/Pelicula.cpp.o	df4d870ad847fb7b
+371	1640	1782762091533599000	CMakeFiles/benchmark_indexacion.dir/src/Texto.cpp.o	93082b2b00e81321
+144	1643	1782762091307070300	CMakeFiles/ProyectoFinal.dir/src/Texto.cpp.o	bb47ccc875138e09
+217	1890	1782762091379294300	CMakeFiles/benchmark_indexacion.dir/src/EstrategiaSimilitud.cpp.o	2d6993f00941e904
+19	1891	1782762091181807700	CMakeFiles/ProyectoFinal.dir/src/EstrategiaSimilitud.cpp.o	63579c5df86479ce
+232	1893	1782762091394509400	CMakeFiles/benchmark_indexacion.dir/src/GestorSesion.cpp.o	609d76a1e4b2d136
+33	1915	1782762091195080400	CMakeFiles/ProyectoFinal.dir/src/GestorSesion.cpp.o	a825afd6efa134d7
+178	2008	1782762091341457400	CMakeFiles/benchmark_indexacion.dir/benchmarks/benchmark_indexacion.cpp.o	d57aec999ce87e6c
+161	2080	1782762091324569100	CMakeFiles/ProyectoFinal.dir/src/main.cpp.o	9a1e23584f07cfac
+60	2116	1782762091222203800	CMakeFiles/ProyectoFinal.dir/src/Interfaz.cpp.o	ad8aa47a576f62b7
+281	2121	1782762091443507200	CMakeFiles/benchmark_indexacion.dir/src/Interfaz.cpp.o	38f5feee4ea4c76e
+88	2738	1782762091250981200	CMakeFiles/ProyectoFinal.dir/src/MotorRecomendaciones.cpp.o	cbf3d5c6a6d23fcf
+320	2739	1782762091482485900	CMakeFiles/benchmark_indexacion.dir/src/MotorRecomendaciones.cpp.o	2a787e7bb85d927d
+46	3040	1782762091208664800	CMakeFiles/ProyectoFinal.dir/src/IndiceBusqueda.cpp.o	6902b923b5bd92ec
+254	3059	1782762091417654600	CMakeFiles/benchmark_indexacion.dir/src/IndiceBusqueda.cpp.o	ade0819de49d37a2
+300	3122	1782762091463616800	CMakeFiles/benchmark_indexacion.dir/src/LectorCSV.cpp.o	9426141d34a09332
+73	3146	1782762091230943900	CMakeFiles/ProyectoFinal.dir/src/LectorCSV.cpp.o	2ebd757a1db43bcc
+3125	3250	1782762094287569900	benchmark_indexacion.exe	95a0cacbacc9d02c
+3149	3270	1782762094311541400	ProyectoFinal.exe	5f37fdc27db16f6d

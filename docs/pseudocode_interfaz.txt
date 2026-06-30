@@ -1,0 +1,49 @@
+ALGORITMO Interfaz::iniciar()
+    INICIO
+        opcion = 0
+        MIENTRAS opcion != 3 HACER:
+            1. Llamar a mostrarMenu()
+            2. LEER opcion desde el teclado
+            3. Limpiar el buffer de entrada (cin.ignore)
+            
+            SELECCIONAR opcion:
+                CASO 1:
+                    Llamar a buscarPelicula()
+                CASO 2:
+                    MOSTRAR "Cantidad de peliculas cargadas: " + pelis.size()
+                CASO 3:
+                    MOSTRAR "Saliendo del programa..."
+                OTRO:
+                    MOSTRAR "Opción inválida."
+        FIN MIENTRAS
+    FIN
+
+ALGORITMO Interfaz::buscarPelicula()
+    INICIO
+        1. MOSTRAR "Ingrese búsqueda: "
+        2. LEER busqueda 
+        3. Convertir busqueda a minusculas 
+        
+        // Llamada al motor de búsqueda 
+        4. //Retornar lista de IDs de resultados = trie.buscar(busqueda) 
+        
+        5. Llamar a mostrarResultados
+    FIN
+ALGORITMO Interfaz::mostrarResultados(resultados)
+    INICIO
+        1. SI resultados está vacío ENTONCES:
+            MOSTRAR "No se encontraron películas."
+            RETORNAR
+            
+        2. Mostrar resultados de 5 en 5
+        
+        4. Iteramos sobre la longitud de los resultados MIENTRAS i < limite:
+            a. id = resultados[i]
+            
+            // Verificación de seguridad de índice
+            b. SI id es válido dentro del rango de pelis ENTONCES:
+                Llamar a pelis[id].mostrarPeli() // Muestra detalles de la película
+            
+        5. SI longitud(resultados) > limite ENTONCES:
+            MOSTRAR "(Se muestran los primeros 5 resultados)"
+    FIN
