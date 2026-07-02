@@ -68,7 +68,7 @@ Para el **plot** y los **tags** se indexa solo la palabra completa: generar todo
 
 ---
 
-## 5. Patrones de diseno (5; el minimo pedido es 4)
+## 5. Patrones de diseño 
 
 ### 1. Builder en `PeliculaBuilder`
 `Pelicula` tiene 8 campos. En vez de un constructor posicional de 8
