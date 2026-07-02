@@ -36,7 +36,7 @@ docs/           Pseudocodigo original del equipo + este documento
 
 ---
 
-## 3. Funcionalidades cubiertas
+## 2. Funcionalidades cubiertas
 
 - Busqueda por palabra, frase y sub-palabra
 - Busqueda por Tag: Director, Cast, Genero 
@@ -51,7 +51,7 @@ docs/           Pseudocodigo original del equipo + este documento
 
 ---
 
-## 4. Algoritmo de busqueda e importancia
+## 3. Algoritmo de busqueda e importancia
 
 Cada palabra del titulo, del plot y de cada Tag se inserta en un Trie con
 un peso distinto (`Comun.h`):
@@ -68,7 +68,7 @@ Para el **plot** y los **tags** se indexa solo la palabra completa: generar todo
 
 ---
 
-## 5. Patrones de diseño 
+## 4. Patrones de diseño 
 
 ### 1. Builder en `PeliculaBuilder`
 `Pelicula` tiene 8 campos. En vez de un constructor posicional de 8
@@ -100,7 +100,7 @@ la notificacion.
 
 ---
 
-## 6. Programacion paralela
+## 5. Programacion paralela
 
 1. Parseo del CSV: una vez leidos los
    registros de texto (E/S secuencial), convertirlos en objetos
