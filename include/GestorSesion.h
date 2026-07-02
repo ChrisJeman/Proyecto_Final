@@ -1,11 +1,7 @@
 // GestorSesion.h
-//
+// PATRON SINGLETON
 // GestorSesion es el unico punto de acceso al estado de interaccion del
-// usuario (Likes, Ver-mas-tarde) durante toda la ejecucion -> PATRON
-// SINGLETON (hereda de Singleton<GestorSesion>, ver Singleton.h). Tambien
-// actua como "sujeto" del PATRON OBSERVER: cuando el usuario da Like,
-// notifica a todos los observadores suscritos (ver Observador.h) sin
-// conocer sus tipos concretos.
+// usuario (Likes, Ver-mas-tarde) durante toda la ejecucion .Hereda de Singleton<GestorSesion>, ver Singleton.h)
 #pragma once
 
 #include <memory>
@@ -34,10 +30,6 @@ public:
 
     void suscribir(std::shared_ptr<IObservadorLikes> observador);
 
-    // Persistencia simple en disco (data/likes.txt, data/ver_mas_tarde.txt)
-    // usando el Repositorio<int> generico. Esto es lo que permite que, al
-    // reiniciar el programa, la plataforma "recuerde" Ver-mas-tarde y los
-    // Likes de la sesion anterior, tal como pide el enunciado.
     void cargarDesdeDisco();
     void guardarEnDisco() const;
 
@@ -52,4 +44,4 @@ private:
     Repositorio<IdPelicula> repoVerMasTarde_{"data/ver_mas_tarde.txt"};
 };
 
-} // namespace streaming
+}

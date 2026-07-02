@@ -17,8 +17,7 @@ IndiceBusqueda::IndiceBusqueda(std::shared_ptr<IEstrategiaRanking> estrategia, u
 void IndiceBusqueda::indexarPelicula(ShardIndice& shard, const Pelicula& peli) const {
     const IdPelicula id = peli.getId();
 
-    // --- Titulo: Suffix Trie con peso alto, marcando TODO el camino para
-    //     habilitar busqueda por sub-palabra (ver Trie.h, marcarCamino). ---
+    // --- Titulo: Trie de sufijos para coincidencias parciales (substrings)
     for (const std::string& palabra : texto::tokenizarCampoMultivaluado(peli.getTitulo())) {
         for (std::size_t j = 0; j < palabra.size(); ++j) {
             std::string_view sufijo(palabra.data() + j, palabra.size() - j);
@@ -28,8 +27,7 @@ void IndiceBusqueda::indexarPelicula(ShardIndice& shard, const Pelicula& peli) c
         }
     }
 
-    // --- Tags: Trie estandar (solo palabra completa) para no explotar la
-    //     memoria como pasaria con sufijos sobre la sinopsis completa. ---
+    // --- Tags: Trie estandar, palabra completa, peso medio. 
     auto indexarTag = [&](const std::string& valor, Trie<MapaRanking>& trieEspecifico) {
         for (const std::string& palabra : texto::tokenizarCampoMultivaluado(valor)) {
             shard.trieTexto.insertar(palabra, [id](MapaRanking& m) { m[id] += PESO_TAG; });
@@ -56,9 +54,7 @@ double IndiceBusqueda::construir(const std::vector<Pelicula>& pelis, bool parale
 
     std::size_t tamanoBloque = (total + numHilos - 1) / std::max<unsigned>(1, numHilos);
 
-    // Cada tarea construye un ShardIndice COMPLETO e independiente: sin
-    // memoria compartida mutable entre hilos, por lo tanto sin necesidad de
-    // mutex/locks (paralelismo de datos puro).
+    // Cada hilo construye un shard de manera independiente y devuelve un puntero al mismo.
     std::vector<std::future<std::unique_ptr<ShardIndice>>> futuros;
 
     for (unsigned h = 0; h < numHilos; ++h) {
@@ -146,4 +142,4 @@ std::vector<std::pair<IdPelicula, Puntaje>> IndiceBusqueda::buscarPorTag(TipoTag
     return paginar(acumulado, pagina);
 }
 
-} // namespace streaming
+} 

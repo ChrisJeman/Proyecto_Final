@@ -56,4 +56,4 @@ Pelicula PeliculaBuilder::construir() const {
     return Pelicula(id_, anio_, titulo_, origen_, director_, cast_, genero_, wikiPage_, plot_);
 }
 
-} // namespace streaming
+} 

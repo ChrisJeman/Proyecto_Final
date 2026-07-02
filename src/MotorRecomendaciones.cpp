@@ -131,4 +131,4 @@ std::vector<IdPelicula> MotorRecomendaciones::obtenerRecomendaciones() const {
     return recomendacionesCache_;
 }
 
-} // namespace streaming
+}

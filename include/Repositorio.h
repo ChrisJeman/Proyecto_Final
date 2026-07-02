@@ -1,12 +1,5 @@
 // Repositorio.h
-//
-// PROGRAMACION GENERICA (segundo template del proyecto, ver tambien Trie.h):
-// Tanto los ids con Like como los ids en Ver-mas-tarde necesitan guardarse
-// y recuperarse de disco entre ejecuciones. En vez de escribir dos pares de
-// funciones casi identicas (guardarLikes/cargarLikes, guardarVerMasTarde/
-// cargarVerMasTarde), se define un template Repositorio<T> reutilizable
-// para cualquier tipo T que sepa leerse/escribirse con los operadores
-// estandar de stream (>> y <<) -- en este proyecto, T = IdPelicula (int).
+
 #pragma once
 
 #include <fstream>
@@ -16,6 +9,7 @@
 namespace streaming {
 
 template <typename T>
+// Clase generica para persistir un vector de datos en disco.
 class Repositorio {
 public:
     explicit Repositorio(std::string ruta) : ruta_(std::move(ruta)) {}
@@ -24,7 +18,7 @@ public:
         std::vector<T> datos;
         std::ifstream entrada(ruta_);
         if (!entrada.is_open()) {
-            return datos; // primera ejecucion: todavia no existe el archivo
+            return datos; 
         }
         T valor;
         while (entrada >> valor) {
@@ -44,4 +38,4 @@ private:
     std::string ruta_;
 };
 
-} // namespace streaming
+} 

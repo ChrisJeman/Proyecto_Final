@@ -1,7 +1,5 @@
 // Pelicula.h
-// Entidad principal del dominio. Equivalente a la clase "Pelis" original,
-// con un id explicito (necesario para indexar en los Trie) y getters por
-// referencia constante para evitar copias innecesarias de string.
+
 #pragma once
 
 #include <string>
@@ -29,14 +27,12 @@ public:
     const std::string& getWikiPage() const { return wikiPage_; }
     const std::string& getPlot() const { return plot_; }
 
-    // Campos multivaluados ya separados (ej. "Drama, Comedy" -> {"drama","comedy"}).
-    // Se usan en el algoritmo de similitud para recomendaciones.
+    // Campos multivaluados ya separados 
     std::vector<std::string> generosComoConjunto() const;
 
-    // Impresion compacta para listas de resultados ("1. Titulo (anio)").
     void mostrarResumen(int indice = -1) const;
 
-    // Impresion completa: sinopsis + datos, para cuando el usuario selecciona la pelicula.
+    // Impresion completa: sinopsis + datos
     void mostrarDetalle() const;
 
 private:
@@ -45,4 +41,4 @@ private:
     std::string titulo_, origen_, director_, cast_, genero_, wikiPage_, plot_;
 };
 
-} // namespace streaming
+} 

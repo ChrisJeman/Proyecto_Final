@@ -8,8 +8,9 @@
 namespace streaming {
 
 double SimilitudPorGeneroYDirector::calcular(const Pelicula& base, const Pelicula& candidata) const {
+    // Si es la misma pelicula, no se recomienda a si misma
     if (base.getId() == candidata.getId()) {
-        return 0.0; // una pelicula no se recomienda a si misma
+        return 0.0; 
     }
 
     auto generosBase = base.generosComoConjunto();
@@ -38,4 +39,4 @@ double SimilitudPorGeneroYDirector::calcular(const Pelicula& base, const Pelicul
     return jaccard + (mismoDirector ? 0.25 : 0.0);
 }
 
-} // namespace streaming
+}

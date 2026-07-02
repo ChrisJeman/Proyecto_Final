@@ -4,15 +4,13 @@
 #include <algorithm>
 
 namespace streaming {
-
+// GestorSesion es el unico punto de acceso al estado de interaccion del usuario
 GestorSesion::GestorSesion() = default;
 
 void GestorSesion::darLike(IdPelicula id) {
     if (!tieneLike(id)) {
         likes_.push_back(id);
     }
-    // Notificacion a observadores (PATRON OBSERVER): cada uno decide que
-    // hacer con el nuevo Like (MotorRecomendaciones recalcula similares).
     for (const auto& observador : observadores_) {
         observador->alRecibirLike(id);
     }
@@ -50,4 +48,4 @@ void GestorSesion::guardarEnDisco() const {
     repoVerMasTarde_.guardar(verMasTarde_);
 }
 
-} // namespace streaming
+} 

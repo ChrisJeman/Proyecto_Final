@@ -113,10 +113,6 @@ std::vector<Pelicula> LectorCSV::cargar(const std::string& ruta, bool paralelo, 
         return parsearRango(registros, 0, registros.size());
     }
 
-    // Repartimos los registros en bloques contiguos de tamano similar.
-    // OJO: no usamos identificadores generados localmente por cada hilo;
-    // el id de cada Pelicula es su posicion ABSOLUTA en 'registros', asi
-    // que no hace falta ningun paso de "renumeracion" al unir los bloques.
     std::vector<std::future<std::vector<Pelicula>>> futuros;
     std::size_t total = registros.size();
     std::size_t tamanoBloque = (total + numHilos - 1) / numHilos;
@@ -142,4 +138,4 @@ std::vector<Pelicula> LectorCSV::cargar(const std::string& ruta, bool paralelo, 
     return todas;
 }
 
-} // namespace streaming
+} 

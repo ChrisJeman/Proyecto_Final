@@ -31,15 +31,12 @@ void Interfaz::iniciar() {
         int opcion = 0;
         if (!(std::cin >> opcion)) {
             if (std::cin.eof()) {
-                // Entrada finalizada de forma inesperada (ej. redireccion de
-                // archivo, pipe cerrado): salimos en vez de quedar en un
-                // bucle leyendo de un stream que ya no tiene datos.
                 std::cout << "\nEntrada finalizada. Saliendo...\n";
                 break;
             }
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "\nOpcion invalida. Intente nuevamente.\n";
+            std::cout << "\nOpcion invalida. Intente nuevamente\n";
             continue;
         }
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -63,12 +60,12 @@ void Interfaz::iniciar() {
                 opcionRecomendaciones();
                 break;
             default:
-                std::cout << "\nOpcion invalida. Intente nuevamente.\n";
+                std::cout << "\nOpcion invalida. Intente nuevamente\n";
                 break;
         }
     }
 }
-
+// Maneja la seleccion de una pelicula, mostrando su detalle y ofreciendo Like/Ver mas tarde.
 void Interfaz::mostrarListaSimple(const std::vector<IdPelicula>& ids, const std::string& tituloSeccion) {
     if (ids.empty()) {
         return;
@@ -81,7 +78,7 @@ void Interfaz::mostrarListaSimple(const std::vector<IdPelicula>& ids, const std:
         }
     }
 }
-
+// Muestra la ficha de una pelicula seleccionada y ofrece Like/Ver mas tarde.
 void Interfaz::mostrarResultadosPaginados(
     const std::string& descripcionConsulta,
     const std::function<std::vector<std::pair<IdPelicula, Puntaje>>(int)>& obtenerPagina) {
@@ -94,7 +91,7 @@ void Interfaz::mostrarResultadosPaginados(
                    << ") -----\n";
 
         if (resultados.empty()) {
-            std::cout << (pagina == 0 ? "No se encontraron peliculas.\n" : "No hay mas resultados.\n");
+            std::cout << (pagina == 0 ? "No se encontraron peliculas\n" : "No hay mas resultados\n");
             break;
         }
 
@@ -107,7 +104,7 @@ void Interfaz::mostrarResultadosPaginados(
         }
 
         std::cout << "\nEscriba 1-" << resultados.size()
-                   << " para ver el detalle, 'n' para la siguiente pagina, o 'q' para volver: ";
+                   << " para ver los detalle, 'n' para la siguiente pagina, o 'q' para volver: ";
         std::string entrada;
         std::getline(std::cin, entrada);
 
@@ -124,10 +121,10 @@ void Interfaz::mostrarResultadosPaginados(
             if (seleccion >= 1 && static_cast<std::size_t>(seleccion) <= resultados.size()) {
                 manejarSeleccion(resultados[static_cast<std::size_t>(seleccion - 1)].first);
             } else {
-                std::cout << "Numero fuera de rango.\n";
+                std::cout << "Numero fuera de rango\n";
             }
         } catch (...) {
-            std::cout << "Entrada no reconocida.\n";
+            std::cout << "Entrada no reconocida\n";
         }
     }
 }
@@ -138,7 +135,7 @@ void Interfaz::opcionBuscarTexto() {
     std::getline(std::cin, consulta);
 
     if (consulta.empty()) {
-        std::cout << "Busqueda vacia.\n";
+        std::cout << "Busqueda vacia\n";
         return;
     }
 
@@ -163,7 +160,7 @@ void Interfaz::opcionBuscarPorTag() {
         tipo = TipoTag::GENERO;
         nombreTipo = "Genero";
     } else {
-        std::cout << "Opcion invalida.\n";
+        std::cout << "Opcion invalida\n";
         return;
     }
 
@@ -172,7 +169,7 @@ void Interfaz::opcionBuscarPorTag() {
     std::getline(std::cin, consulta);
 
     if (consulta.empty()) {
-        std::cout << "Busqueda vacia.\n";
+        std::cout << "Busqueda vacia\n";
         return;
     }
 
@@ -184,7 +181,7 @@ void Interfaz::opcionBuscarPorTag() {
 void Interfaz::opcionVerMasTarde() {
     const std::vector<IdPelicula>& ids = sesion_.obtenerVerMasTarde();
     if (ids.empty()) {
-        std::cout << "\nTu lista de Ver mas tarde esta vacia.\n";
+        std::cout << "\nTu lista de Ver mas tarde esta vacia\n";
         return;
     }
 
@@ -201,17 +198,17 @@ void Interfaz::opcionVerMasTarde() {
         if (seleccion >= 1 && static_cast<std::size_t>(seleccion) <= ids.size()) {
             manejarSeleccion(ids[static_cast<std::size_t>(seleccion - 1)]);
         } else {
-            std::cout << "Numero fuera de rango.\n";
+            std::cout << "Numero fuera de range\n";
         }
     } catch (...) {
-        std::cout << "Entrada no reconocida.\n";
+        std::cout << "Entrada no reconocida\n";
     }
 }
 
 void Interfaz::opcionRecomendaciones() {
     std::vector<IdPelicula> ids = recomendaciones_.obtenerRecomendaciones();
     if (ids.empty()) {
-        std::cout << "\nTodavia no hay recomendaciones (dale Like a alguna pelicula primero).\n";
+        std::cout << "\nTodavia no hay recomendaciones (dale Like a alguna pelicula)\n";
         return;
     }
 
@@ -228,10 +225,10 @@ void Interfaz::opcionRecomendaciones() {
         if (seleccion >= 1 && static_cast<std::size_t>(seleccion) <= ids.size()) {
             manejarSeleccion(ids[static_cast<std::size_t>(seleccion - 1)]);
         } else {
-            std::cout << "Numero fuera de rango.\n";
+            std::cout << "Numero fuera de rango\n";
         }
     } catch (...) {
-        std::cout << "Entrada no reconocida.\n";
+        std::cout << "Entrada no reconocida\n";
     }
 }
 
@@ -259,8 +256,8 @@ void Interfaz::manejarSeleccion(IdPelicula id) {
         std::cout << "Le diste Like a \"" << peli.getTitulo() << "\".\n";
     } else if (entrada == "2") {
         sesion_.agregarVerMasTarde(id);
-        std::cout << "\"" << peli.getTitulo() << "\" se agrego a tu lista de Ver mas tarde.\n";
+        std::cout << "\"" << peli.getTitulo() << "\" se agrego a tu lista de Ver mas tarde\n";
     }
 }
 
-} // namespace streaming
+}

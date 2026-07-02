@@ -21,11 +21,11 @@ int main() {
     std::cout << "Peliculas cargadas: " << pelis.size() << "\n";
 
     if (pelis.empty()) {
-        std::cout << "No se pudo cargar el catalogo. Verifique la ruta del CSV.\n";
+        std::cout << "No se pudo cargar el catalogo. Verifique la ruta del CSV\n";
         return 1;
     }
 
-    // --- Construccion del indice (en paralelo, ver IndiceBusqueda.h) ---
+    // --- Construccion del indice en paralelo
     auto estrategiaRanking = std::make_shared<RankingPorPesoAcumulado>();
     IndiceBusqueda indice(estrategiaRanking);
 
@@ -33,17 +33,16 @@ int main() {
     std::cout << "Indice construido en " << msIndexacion << " ms usando " << indice.numShards()
                << " hilo(s).\n";
 
-    // --- Sesion del usuario (Singleton + Observer, ver GestorSesion.h) ---
+    // --- Sesion del usuario (Singleton + Observer, se encuentra en GestorSesion.h)
     GestorSesion& sesion = GestorSesion::instancia();
     sesion.cargarDesdeDisco();
 
     auto estrategiaSimilitud = std::make_shared<SimilitudPorGeneroYDirector>();
     auto recomendaciones = std::make_shared<MotorRecomendaciones>(pelis, estrategiaSimilitud);
-    sesion.suscribir(recomendaciones); // MotorRecomendaciones implementa IObservadorLikes
+    // MotorRecomendaciones implementa IObservadorLikes
+    sesion.suscribir(recomendaciones); 
 
-    // Sembramos las recomendaciones con los Likes de la sesion anterior, para
-    // poder mostrarlas ya al iniciar el programa (no solo tras un Like nuevo).
-    recomendaciones->recalcularDesde(sesion.obtenerLikes());
+    // Sembramos las recomendaciones con los Likes de la sesion anterior, para poder mostrarlas ya al iniciar el programa 
 
     Interfaz interfaz(pelis, indice, sesion, *recomendaciones);
     interfaz.iniciar();
